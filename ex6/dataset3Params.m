@@ -22,13 +22,22 @@ sigma = 0.3;
 %  Note: You can compute the prediction error using 
 %        mean(double(predictions ~= yval))
 %
+% Setup vectors for C and sigma to try. setup vectors for C temporary and sigma temporary.
+C_list = [0.01 0.03 0.1 0.3 1 3 10 30]'; 
+sigma_list = [0.01 0.03 0.1 0.3 1 3 10 30]';
+%C_temp = zeros(length(C_list),1);
+%sigma_temp = zeros(length(sigma_temp),1);
 
-
-
-
-
-
-
+for i = 1:length(C_list)
+    for j = 1:length(sigma_list)
+        model = svmTrain(X, y, C_list(i), @(x1, x2) gaussianKernel(x1, x2, sigma_list(j)));
+        pred = svmPredict(model, Xval);
+        error_diff = mean(double(pred != yval));    %calcuate the accuracy of prediction
+        param_list = [C_list(i) sigma_list(j) error_diff]; %stores the corresponding values of C, sigma, error
+    endfor
+endfor
+[Param_error iParam] = min (param_list(:,3));           %find the row with lowest error
+%[C sigma] = [param_list(iParam,1) param_list(iParam,2); %returns C and sigma in row with lowest error 
 % =========================================================================
 
 end
