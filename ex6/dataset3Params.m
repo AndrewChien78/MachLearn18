@@ -25,19 +25,26 @@ sigma = 0.3;
 % Setup vectors for C and sigma to try. setup vectors for C temporary and sigma temporary.
 C_list = [0.01 0.03 0.1 0.3 1 3 10 30]'; 
 sigma_list = [0.01 0.03 0.1 0.3 1 3 10 30]';
+n = 0;
 %C_temp = zeros(length(C_list),1);
 %sigma_temp = zeros(length(sigma_temp),1);
 
 for i = 1:length(C_list)
     for j = 1:length(sigma_list)
+        n = n+1;
         model = svmTrain(X, y, C_list(i), @(x1, x2) gaussianKernel(x1, x2, sigma_list(j)));
         pred = svmPredict(model, Xval);
         error_diff = mean(double(pred != yval));    %calcuate the accuracy of prediction
-        param_list = [C_list(i) sigma_list(j) error_diff]; %stores the corresponding values of C, sigma, error
+        param_list(n,:) = [C_list(i) sigma_list(j) error_diff]; %stores the corresponding values of C, sigma, error
+        printf("n=%d i=%d j=%d C_list=%d sigma_list=%d\n",n,i,j,C_list(i),sigma_list(j)); 
+        printf("error_diff=%d\n",error_diff);   
     endfor
 endfor
+printf(" C_List     sigma_list  error_diff\n");
+param_list
 [Param_error iParam] = min (param_list(:,3));           %find the row with lowest error
-%[C sigma] = [param_list(iParam,1) param_list(iParam,2); %returns C and sigma in row with lowest error 
+C = param_list(iParam,1);
+sigma = param_list(iParam,2); %returns C and sigma in row with lowest error 
 % =========================================================================
 
 end
