@@ -36,12 +36,12 @@ for i = 1:length(C_list)
         pred = svmPredict(model, Xval);
         error_diff = mean(double(pred != yval));    %calcuate the accuracy of prediction
         param_list(n,:) = [C_list(i) sigma_list(j) error_diff]; %stores the corresponding values of C, sigma, error
-        printf("n=%d i=%d j=%d C_list=%d sigma_list=%d\n",n,i,j,C_list(i),sigma_list(j)); 
-        printf("error_diff=%d\n",error_diff);   
+        %printf("n=%d i=%d j=%d C_list=%d sigma_list=%d\n",n,i,j,C_list(i),sigma_list(j)); 
+        %printf("error_diff=%d\n",error_diff);   
     endfor
 endfor
-printf(" C_List     sigma_list  error_diff\n");
-param_list
+%printf(" C_List     sigma_list  error_diff\n");
+%param_list
 [Param_error iParam] = min (param_list(:,3));           %find the row with lowest error
 C = param_list(iParam,1);
 sigma = param_list(iParam,2); %returns C and sigma in row with lowest error 
