@@ -20,12 +20,13 @@ idx = zeros(size(X,1), 1);
 %
 % Note: You can use a for-loop over the examples to compute this.
 %
+% Create and initialize a distance, D matrix
+D = zeros(size(X,1),K);
 
-
-
-
-
-
+for i = 1:K
+    D(:,i) = sum((bsxfun(@minus, X, centroids(i,:))).^2,2);
+endfor
+    [D_min idx] = min(D,[],2);
 
 % =============================================================
 
