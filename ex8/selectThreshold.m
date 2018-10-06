@@ -28,9 +28,9 @@ for epsilon = min(pval):stepsize:max(pval)
     %epsilon
     %count = count+1
     
-    tp = sum(yval == 1 & (pval < epsilon))
-    fp = sum(yval == 0 & (pval < epsilon))
-    fn = sum(yval == 1 & (pval > epsilon))
+    tp = sum(yval == 1 & (pval < epsilon));
+    fp = sum(yval == 0 & (pval < epsilon));
+    fn = sum(yval == 1 & (pval > epsilon));
 
     prec = tp/(tp+fp);
     rec = tp/(tp+fn);
