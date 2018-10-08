@@ -3,7 +3,7 @@
 function test6b
 %Test 6b (a user with no reviews):
 %input:
-printf ("Running Test 6b TescofiCostFunc() \n");
+printf ("Running Test 6b Regularized Cost for TescofiCostFunc() \n");
     params = [ 1:14 ] / 10;
     Y = magic(4);
     Y = Y(:,1:3);
@@ -14,9 +14,9 @@ printf ("Running Test 6b TescofiCostFunc() \n");
     lambda = 6;
     [J, grad] = cofiCostFunc(params, Y, R, num_users, num_movies, num_features, lambda)
 
-    assert(J, 331.08, 0.00001);
+    assert(J, 331.08, 0.01);
     assert(grad,[-15.5880; -22.3440; 1.8000; -12.5720; -18.4380; -26.8620; 4.2000; -14.7440; 1.9770; -1.0280; 4.5930;
-   -5.0590; -8.2600; 1.9410], 0.00001);
+   -5.0590; -8.2600; 1.9410], 0.001);
 printf ("Test6b passed\n ");
 
 endfunction

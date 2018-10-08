@@ -14,9 +14,9 @@ printf ("Running Test4 - cofiCostFunc() \n");
     lambda = 0;
     [J, grad] = cofiCostFunc(params, Y, R, num_users, num_movies, num_features, lambda)
 
-    assert(J, 311.63, 0.00001);
+    assert(J, 311.63, 0.01);
     assert(grad,[-16.1880; -23.5440; -5.1590; -14.9720; -21.4380; -30.4620; -6.5660; -19.5440; -3.4230; -7.0280;
--3.4140; -12.2590; -16.0600; -9.7420], 0.00001);
+-3.4140; -12.2590; -16.0600; -9.7420], 0.001);
 printf ("Test4 passed\n ");
 
 endfunction

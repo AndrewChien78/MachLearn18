@@ -3,7 +3,7 @@
 function test5
 %Test 5a (Regularized Cost):
 %input:
-printf ("Running Test5 - Regularized Cost for coficostFunc() \n");
+printf ("Running Test5 - Regularized Cost for cofiCostFunc() \n");
     params = [ 1:14 ] / 10;
     Y = magic(4);
     Y = Y(:,1:3);
@@ -13,7 +13,7 @@ printf ("Running Test5 - Regularized Cost for coficostFunc() \n");
     num_features = 2;
     lambda = 6;
     J = cofiCostFunc(params, Y, R, num_users, num_movies, num_features, lambda)
-    assert(J, 342.08, 0.00001);
+    assert(J, 342.08, 0.001);
 
 printf ("Test5 passed\n ");
 

@@ -46,20 +46,20 @@ M_rate_err =  Y - Pred_Rates;   % size(M_rate_err)=num_movies x num_users
 Error_fact = M_rate_err.*R;    % size(Error_fact)=num_movies x num_users
                                 % Used to mask only those elements with ratings
 
-J = 1/2*sum(sum((Error_fact).^2)); 
+% Calculate regularization terms
+Regcost_theta = lambda/2*sum(sum(Theta.^2));
+Regcost_X = lambda/2*sum(sum(X.^2));
+Reggrad_X = lambda*X;
+Reggrad_Theta = lambda*Theta;
 
+% Calculate the cost
+J = 1/2*sum(sum((Error_fact).^2)) + Regcost_theta + Regcost_X; 
 
+% Calculate the gradients
 
+X_grad = -Error_fact*Theta + Reggrad_X; % size(X_grad) = num_movies x num_features
 
-
-
-
-
-
-
-
-
-
+Theta_grad = -Error_fact'*X + Reggrad_Theta; % size(Theta_grad) = num_users x num_features
 
 
 % =============================================================
