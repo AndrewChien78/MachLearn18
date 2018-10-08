@@ -39,7 +39,14 @@ Theta_grad = zeros(size(Theta));
 %        Theta_grad - num_users x num_features matrix, containing the 
 %                     partial derivatives w.r.t. to each element of Theta
 %
+Pred_Rates =  X*Theta';        % size(Pred_Rates)=num_movies x num_users
 
+M_rate_err =  Y - Pred_Rates;   % size(M_rate_err)=num_movies x num_users
+
+Error_fact = M_rate_err.*R;    % size(Error_fact)=num_movies x num_users
+                                % Used to mask only those elements with ratings
+
+J = 1/2*sum(sum((Error_fact).^2)); 
 
 
 
